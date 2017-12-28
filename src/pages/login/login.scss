@@ -1,0 +1,23 @@
+page-login {
+  .content {
+    background-color: #333;
+    color: #fff;
+  }
+
+
+  .flex-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 60vh;
+  }
+
+  .login-form {
+    width: 90%;
+    .input-login {
+      margin-top: 5px;
+    }
+  }
+
+}
