@@ -1,7 +1,11 @@
+import { FirebaseAuthState } from 'angularfire2';
+import { AuthServiceProvider } from './../providers/auth/auth.service';
+import { User } from './../models/user.model';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { UserServiceProvider } from '../providers/user/user.service';
 
 /*
 const config = {
@@ -18,12 +22,24 @@ const config = {
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-
+  currentUser :User;
   rootPage: any = 'WelcomePage';
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(authService:AuthServiceProvider,userService:UserServiceProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+   authService.auth.subscribe(
+     (authState:FirebaseAuthState) =>{
+       if(authState){
+         userService.currentUser.subscribe(
+           (user:User) =>{
+             this.currentUser = user;
+           }
+         );
+       }
+     }
+   );
+   
     this.initializeApp();
 
     // used for an example of ngFor and navigation

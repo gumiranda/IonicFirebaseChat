@@ -9,8 +9,10 @@ import { AuthServiceProvider } from '../../providers/auth/auth.service';
 })
 export class CustomLoggedHeaderComponent extends BaseComponent {
 
-
-
+/*  <button ion-button icon-only (click) ="onLogout()">
+<ion-icon name="exit"></ion-icon>
+</button>
+*/
  @Input() title: string;
 
   constructor(public alertCtrl: AlertController, public authService: AuthServiceProvider,

@@ -24,6 +24,8 @@ import { ProfissionalLoginPage } from '../pages/profissionalLogin/profissionallo
 import { BaseComponent } from '../components/base.component';
 import { ChatServiceProvider } from '../providers/chat/chat.service';
 import { MessageBoxComponent } from '../components/message-box/message-box';
+import { UserMenuComponent } from '../components/user-menu/user-menu';
+import { UserInfoComponent } from '../components/user-info/user-info';
 
 const firebaseAppConfig : FirebaseAppConfig = {
   apiKey: "AIzaSyDBQl4HG_lqovYTg-ATndA3Co4JnUdoyiM",
@@ -42,7 +44,7 @@ const firebaseAuthConfig = {
 
 @NgModule({
   declarations: [
-    MessageBoxComponent,CustomLoggedHeaderComponent,CapitalizePipe,ChatPage,MyApp,HomePage,ClienteLoginPage,ProfissionalLoginPage,SignupPage,
+    MessageBoxComponent,UserInfoComponent,UserMenuComponent,CustomLoggedHeaderComponent,CapitalizePipe,ChatPage,MyApp,HomePage,ClienteLoginPage,ProfissionalLoginPage,SignupPage,
   ],
   imports: [
     BrowserModule,

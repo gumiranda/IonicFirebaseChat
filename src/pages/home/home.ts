@@ -4,7 +4,7 @@ import { ChatPage } from './../chat/chat';
 import { WelcomePage } from './../welcome/welcome';
 import { AuthServiceProvider } from './../../providers/auth/auth.service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { User } from './../../models/user.model';
 import { UserServiceProvider } from './../../providers/user/user.service';
 import { FirebaseListObservable } from 'angularfire2';
@@ -23,12 +23,13 @@ export class HomePage {
   users: FirebaseListObservable<User[]>;
   view: string = 'chats';
 
-  constructor(public chatService: ChatServiceProvider, public authService: AuthServiceProvider, public userService: UserServiceProvider, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public menuCtrl: MenuController, public chatService: ChatServiceProvider, public authService: AuthServiceProvider, public userService: UserServiceProvider, public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     this.chats = this.chatService.chats;
     this.users = this.userService.users;
+    this.menuCtrl.enable(true, 'user-menu');
     console.log(this.chats);
   }
   onChatCreate(recipientUser: User): void {
@@ -59,16 +60,46 @@ export class HomePage {
     return this.authService.authenticated;
   }
 
-onChatOpen(chat:Chat) : void{
-  let recipientUserId :string = chat.$key;
-  this.userService.get(recipientUserId).first().subscribe(
-    (user:User) =>{
-      this.navCtrl.push(ChatPage,{
-        recipientUser : user
-      });
+  filterItems(event: any): void {
+    let searchTerm: string = event.target.value;
+    console.log(searchTerm);
+    this.chats = this.chatService.chats;
+    this.users = this.userService.users;
+    if (searchTerm) {
+      switch (this.view) {
+        case 'chats':
+          this.chats = <FirebaseListObservable<Chat[]>>this.chats.map(
+            (chats: Chat[]) => {
+              return chats.filter(
+                (chat: Chat) => {
+                  return (chat.title.toLowerCase().indexOf(searchTerm.toLocaleLowerCase()) > -1);
+                });
+            });
+          break;
+        case 'users':
+          this.users = <FirebaseListObservable<User[]>>this.users.map(
+            (users: User[]) => {
+              return users.filter(
+                (user: User) => {
+                  return (user.name.toLowerCase().indexOf(searchTerm.toLocaleLowerCase()) > -1);
+                });
+            });
+          break;
+      }
     }
-  );
-}
+  }
+
+
+  onChatOpen(chat: Chat): void {
+    let recipientUserId: string = chat.$key;
+    this.userService.get(recipientUserId).first().subscribe(
+      (user: User) => {
+        this.navCtrl.push(ChatPage, {
+          recipientUser: user
+        });
+      }
+    );
+  }
 
 
 }
