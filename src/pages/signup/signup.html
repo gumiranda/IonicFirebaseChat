@@ -13,24 +13,35 @@
   <ion-content>
     <div class="flex-container">
       <h1>Criar conta</h1>
-
+<form [formGroup]="signupForm" (ngSubmit) = "onSubmit(); $event.preventDefault()">
       <div class="signup-form animated fadeInRight">
-        <strong>Qual é o seu e-mail?</strong>
+        <strong>Qual é o nome?</strong>
         <ion-item class="input-signup">
-          <ion-input type="text"></ion-input>
+          <ion-input type="text" placeholder = "Nome" formControlName = "name"></ion-input>
+        </ion-item>
+        <p margin-bottom></p>
+        <strong>Qual é o seu nickname?</strong>
+        <ion-item class="input-signup">
+          <ion-input type="text" placeholder = "Username" formControlName = "username"></ion-input>
+        </ion-item>
+        <p margin-bottom></p>
+        <strong>Email</strong>
+        <ion-item class="input-signup">
+          <ion-input type="email" placeholder = "Email" formControlName = "email"></ion-input>
         </ion-item>
         <p margin-bottom>Poderá ser necessário validar este e-mail.</p>
-
         <strong>Crie uma nova senha</strong>
         <ion-item class="input-signup">
-          <ion-input type="password"></ion-input>
+          <ion-input type="password" placeholder = "Senha" formControlName = "password"></ion-input>
         </ion-item>
         <p>Escolha pelo menos oito caracteres.</p>
       </div>
-
+      <br>
       <div class="button">
-        <button ion-button round class="signup-button">Avançar</button>
+        <button ion-button round class="signup-button" 
+        type = "submit" [disabled]="signupForm.invalid" >Cadastrar</button>
       </div>
+    </form>
     </div>
 
 

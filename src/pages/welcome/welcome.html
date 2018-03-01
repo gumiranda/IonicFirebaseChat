@@ -16,10 +16,12 @@
           </ion-slide>
       </ion-slides>
     </div>
-    <button ion-button round class="login-button" color="spotify-light-green" navPush="SignupPage">Inscreva-se grátis</button>
-    <button ion-button round class="login-button" color="facebook">Continuar com o facebook</button>
+    <button ion-button round class="login-button" color="spotify-light-green" (click) = "irCadastro()">Cadastre-se</button>
     <p ion-text color="light">Já é usuário do Spotify?</p>
-    <button ion-button round class="login-button" color="light" navPush="LoginPage">Entrar</button>
+    <button ion-button round class="login-button" color="light" (click) = "irProfissional()">Profissional</button>
+    <button ion-button round class="login-button" color="light" (click) = "irCliente()">Cliente</button>
+    <button ion-button round class="login-button" color="light" (click)="irHome()">Home</button>
+
   </div>
 
   <video #player playsinline autoplay muted loop poster="assets/video/video-cover.jpg" id="bgvid">

@@ -3,7 +3,16 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-
+/*
+const config = {
+  apiKey: "AIzaSyDBQl4HG_lqovYTg-ATndA3Co4JnUdoyiM",
+  authDomain: "spottedagrvai.firebaseapp.com",
+  databaseURL: "https://spottedagrvai.firebaseio.com",
+  projectId: "spottedagrvai",
+  storageBucket: "spottedagrvai.appspot.com",
+  messagingSenderId: "832356265521"
+};
+ */
 @Component({
   templateUrl: 'app.html'
 })

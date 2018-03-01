@@ -1,18 +1,44 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
-</ion-header>
+ <custom-logged-header [title] = "view | capitalize : true"> </custom-logged-header>
+<ion-toolbar>
+  <ion-segment [(ngModel)] = "view">
+    <ion-segment-button value = "chats">
+Chats
+    </ion-segment-button>
+    <ion-segment-button value = "users">
+Users
+    </ion-segment-button>
+  </ion-segment>
+</ion-toolbar>
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
+  </ion-header>
+  
+  <ion-content padding>
+    <div [ngSwitch] = "view">
+    <ion-list no-lines *ngSwitchCase = "'chats'">
+<button ion-item *ngFor = "let chat of chats | async" (click)="onChatOpen(chat)">
+  <h2>
+    {{chat.title}}
+  </h2>
+  <p *ngIf="chat.lastMessage ; else customMessage">
+    {{chat.timestamp | date : 'dd/MM/y H:mm'}} - {{chat.lastMessage}} 
   </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <ng-template #customMessage>
+<p>
+  Não há mensagens
+</p>
+  </ng-template>
+</button>
+    </ion-list>
+  <ion-list no-lines *ngSwitchCase = "'users'">
+  <button ion-item *ngFor = "let user of users | async" (click) = "onChatCreate(user)">
+  {{user.name}}
+  </button>
+  </ion-list>
+</div>
+  <button ion-button round class="login-button" color="spotify-light-green" navPush="SignupPage">Cadastre-se</button>
+  <button ion-button round (click)="onLogout()">Sair</button>
+  
 </ion-content>
+  
