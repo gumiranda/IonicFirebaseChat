@@ -3,6 +3,7 @@ import { Component, Input } from '@angular/core';
 import { BaseComponent } from '../base.component';
 import { AlertController, App, MenuController } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/auth/auth.service';
+import { UserProfilePage } from '../../pages/user-profile/user-profile';
 
 /**
  * Generated class for the UserMenuComponent component.
@@ -22,7 +23,7 @@ export class UserMenuComponent extends BaseComponent {
 super(alertCtrl,authService,app,menuCtrl);
     }
     onProfile() : void{
-      
+      this.navCtrl.push(UserProfilePage);
     }
 
 }

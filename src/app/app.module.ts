@@ -1,3 +1,4 @@
+import { UserProfilePage } from './../pages/user-profile/user-profile';
 import { MessageServiceProvider } from './../providers/message/message.service';
 import { ChatPage } from './../pages/chat/chat';
 import { CapitalizePipe } from './../pipes/capitalize/capitalize';
@@ -44,7 +45,7 @@ const firebaseAuthConfig = {
 
 @NgModule({
   declarations: [
-    MessageBoxComponent,UserInfoComponent,UserMenuComponent,CustomLoggedHeaderComponent,CapitalizePipe,ChatPage,MyApp,HomePage,ClienteLoginPage,ProfissionalLoginPage,SignupPage,
+    UserProfilePage,MessageBoxComponent,UserInfoComponent,UserMenuComponent,CustomLoggedHeaderComponent,CapitalizePipe,ChatPage,MyApp,HomePage,ClienteLoginPage,ProfissionalLoginPage,SignupPage,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +55,7 @@ const firebaseAuthConfig = {
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,HomePage,ClienteLoginPage,ProfissionalLoginPage,SignupPage,ChatPage
+    MyApp,HomePage,UserProfilePage,ClienteLoginPage,ProfissionalLoginPage,SignupPage,ChatPage
   ],
   providers: [
     StatusBar,
