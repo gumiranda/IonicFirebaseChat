@@ -1,8 +1,8 @@
 import { User } from './../../models/user.model';
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { AngularFire, FirebaseListObservable, FirebaseObjectObservable, FirebaseAuthState } from 'angularfire2';
+import { AngularFire, FirebaseListObservable, FirebaseObjectObservable, FirebaseAuthState, FirebaseApp } from 'angularfire2';
 import { BaseService } from '../base.service';
 import { Observable } from 'rxjs/Observable';
 
@@ -19,7 +19,9 @@ export class UserServiceProvider extends BaseService {
   users: FirebaseListObservable<User[]>;
   currentUser: FirebaseObjectObservable<User>;
 
-  constructor(public af: AngularFire, public http: Http) {
+  constructor(public af: AngularFire,
+    /*@Inject(FirebaseApp) public firebaseApp: firebase.app.App*/
+    @Inject(FirebaseApp) public firebaseApp: any,  public http: Http) {
     super();
     // nao precisa mais   this.users = this.af.database.list(`/users`);
     this.listenAuthState();
@@ -57,6 +59,13 @@ export class UserServiceProvider extends BaseService {
     //return this.users.push(user); 
     return this.af.database.object(`/users/${uuid}`).set(user).catch(this.handlePromiseError);
   }
+edit(user:{name:string,username:string,photo:string}) : firebase.Promise<void>{
+  return this.currentUser.update(user).catch(this.handlePromiseError);
+}
+
+uploadPhoto(file:File,userId:string) :firebase.storage.UploadTask {
+  return this.firebaseApp.storage().ref().child(`/users/${userId}`).put(file);
+}
 
   /* // OUTRO MODO DE FAZER
   ref = firebase.database().ref('users/');

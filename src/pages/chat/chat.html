@@ -11,13 +11,13 @@
 
 
 <ion-content padding>
-  
+
     <ion-infinite-scroll position="top" (ionInfinite)="doInfinite($event)">
         <ion-infinite-scroll-content></ion-infinite-scroll-content>
 </ion-infinite-scroll>
 
-  <ion-list no-lines>
-    <message-box *ngFor="let m of messages | async" [message]="m" [isFromSender]="(m.userId == sender.$key)">{{m.text}}</message-box>
+  <ion-list no-lines >
+    <message-box  *ngFor="let m of messages | async" [message]="m" [isFromSender]="(m.userId == sender.$key)">{{m.text}}</message-box>
     </ion-list>
   
 </ion-content>

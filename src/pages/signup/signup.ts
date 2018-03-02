@@ -46,6 +46,7 @@ export class SignupPage {
     let loading: Loading = this.showLoading();
     let formUser = this.signupForm.value;
     let username: string = formUser.username;
+    formUser.photo = '';
     //this.userService.userExists(username).take(1).subscribe(
 
     this.userService.userExists(username).first().subscribe(

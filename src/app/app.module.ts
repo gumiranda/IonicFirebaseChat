@@ -1,3 +1,4 @@
+import { ProgressBarComponent } from './../components/progress-bar/progress-bar';
 import { UserProfilePage } from './../pages/user-profile/user-profile';
 import { MessageServiceProvider } from './../providers/message/message.service';
 import { ChatPage } from './../pages/chat/chat';
@@ -45,7 +46,7 @@ const firebaseAuthConfig = {
 
 @NgModule({
   declarations: [
-    UserProfilePage,MessageBoxComponent,UserInfoComponent,UserMenuComponent,CustomLoggedHeaderComponent,CapitalizePipe,ChatPage,MyApp,HomePage,ClienteLoginPage,ProfissionalLoginPage,SignupPage,
+    UserProfilePage,ProgressBarComponent,MessageBoxComponent,UserInfoComponent,UserMenuComponent,CustomLoggedHeaderComponent,CapitalizePipe,ChatPage,MyApp,HomePage,ClienteLoginPage,ProfissionalLoginPage,SignupPage,
   ],
   imports: [
     BrowserModule,

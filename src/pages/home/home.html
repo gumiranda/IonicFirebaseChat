@@ -21,6 +21,9 @@ Users
     <div [ngSwitch] = "view">
     <ion-list no-lines *ngSwitchCase = "'chats'">
 <button ion-item *ngFor = "let chat of chats | async" (click)="onChatOpen(chat)">
+<ion-avatar item-left>
+<img [src]="chat.photo || 'assets/images/no-photo.jpg'">
+</ion-avatar>
   <h2>
     {{chat.title}}
   </h2>
@@ -36,11 +39,13 @@ Users
     </ion-list>
   <ion-list no-lines *ngSwitchCase = "'users'">
   <button ion-item *ngFor = "let user of users | async" (click) = "onChatCreate(user)">
+      <ion-avatar item-left>
+          <img [src]="user.photo || 'assets/images/no-photo.jpg'">
+          </ion-avatar>
   {{user.name}}
   </button>
   </ion-list>
 </div>
-  <button ion-button round class="login-button" color="spotify-light-green" navPush="SignupPage">Cadastre-se</button>
   <button ion-button round (click)="onLogout()">Sair</button>
   
 </ion-content>

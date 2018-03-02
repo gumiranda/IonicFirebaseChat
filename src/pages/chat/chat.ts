@@ -5,7 +5,7 @@ import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import { User } from './../../models/user.model';
 import { AuthServiceProvider } from './../../providers/auth/auth.service';
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, MenuController } from 'ionic-angular';
 import { UserServiceProvider } from '../../providers/user/user.service';
 import { Message } from '../../models/message.model';
 import firebase from 'firebase';
@@ -36,10 +36,14 @@ export class ChatPage {
   private chat1: FirebaseObjectObservable<Chat>;
   private chat2: FirebaseObjectObservable<Chat>;
   recipient: User;
-  constructor(public chatService: ChatServiceProvider, public messageService: MessageServiceProvider, public userService: UserServiceProvider, public authService: AuthServiceProvider, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public menuCtrl:MenuController,public chatService: ChatServiceProvider, public messageService: MessageServiceProvider, public userService: UserServiceProvider, public authService: AuthServiceProvider, public navCtrl: NavController, public navParams: NavParams) {
   }
-
+  ionViewWillLeave() {
+    this.menuCtrl.enable(true,'user-menu');
+  }
   ionViewDidLoad() {
+    this.menuCtrl.enable(false,'user-menu');
+
     console.log('ionViewDidLoad ChatPage');
     this.recipient = this.navParams.get('recipientUser');
     this.pageTitle = this.recipient.name;
